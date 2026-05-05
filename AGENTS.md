@@ -20,7 +20,8 @@ Before taking any action, ALWAYS follow this reading order:
 8. `.aiassistant/prompts/`
 9. `.aiassistant/rules/CONTEXT_RULES.md`
 10. `.aiassistant/rules/REPOSITORY_GUIDELINES.md`
-11. `.aiassistant/rules/AGENTS.md`
+11. `.aiassistant/rules/WIKILINK_RULES.md`
+12. `.aiassistant/rules/AGENTS.md`
 
 ---
 
@@ -114,6 +115,10 @@ Checklists define validation rules.
 All code generation MUST follow:
 
 - `.aiassistant/rules/AGENTS.md`
+
+All Markdown relationship links inside `.aiassistant` MUST follow:
+
+- `.aiassistant/rules/WIKILINK_RULES.md`
 
 ---
 

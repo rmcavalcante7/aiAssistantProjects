@@ -1,0 +1,11 @@
+# Local IDE settings
+.idea/
+
+# Obsidian local vault state
+.obsidian/
+.aiassistant/.obsidian/
+*.canvas
+
+# Python cache
+__pycache__/
+*.py[cod]

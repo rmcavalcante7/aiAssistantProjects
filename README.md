@@ -25,6 +25,7 @@ The repository is built around five core ideas:
 - runbooks standardize execution
 - checklists enforce validation
 - feedback drives continuous improvement
+- wikilinks expose relationships as an Obsidian knowledge graph
 
 It is especially useful for:
 
@@ -103,6 +104,18 @@ Main files:
 - `CONTEXT_RULES.md`
 - `CONTEXT_TEMPLATE.md`
 - `REPOSITORY_GUIDELINES.md`
+- `WIKILINK_RULES.md`
+
+### `.aiassistant/tools/`
+
+Purpose:
+
+- stores repository-local support scripts
+- validates or exports derived data from `.aiassistant` artifacts
+
+Rule:
+
+- tools are helpers, not a source of truth
 
 ---
 
@@ -135,6 +148,19 @@ Important:
 - every generated file must be adapted to the real project
 - example files in this directory are illustrative only
 
+### Knowledge Graph
+
+The repository supports Obsidian-compatible wikilinks between `.aiassistant` Markdown artifacts.
+
+Use this feature to connect context, decisions, runbooks, checklists, feedback, roadmap, specs, prompts, and rules.
+
+Important:
+
+- links should represent real operational or architectural relationships
+- the graph must not create a second source of truth
+- open `.aiassistant` directly as the Obsidian vault for first-phase visualization
+- use the wikilink validator before accepting new graph relationships
+
 ---
 
 ## How The System Flows
@@ -148,6 +174,7 @@ Typical evolution flow:
 5. `runbooks/` execute repeatable procedures
 6. `checklists/` validate correctness and safety
 7. `project_context/CURRENT_CONTEXT.md` is updated to reflect reality
+8. wikilinks connect meaningful relationships for graph navigation
 
 Not every project uses every layer every day, but the layers exist to keep the system consistent as it grows.
 
