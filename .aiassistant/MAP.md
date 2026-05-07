@@ -17,6 +17,7 @@ It connects the repository governance artifacts without replacing their responsi
 - [[rules/AGENTS|AGENTS rules]]
 - [[WIKILINK_RULES]]
 - [[0001-knowledge-graph-wikilink-policy]]
+- [[0002-automation-simplicity-and-stage-boundaries]]
 
 ## Execution And Validation
 

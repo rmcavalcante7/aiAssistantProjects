@@ -86,10 +86,12 @@ Key directories:
 - Checklists define what must be validated.
 - Templates accelerate creation but are not a source of truth.
 - Wikilinks must connect existing responsibility-specific artifacts and must not create duplicated documentation.
+- Automation architecture must avoid speculative abstraction while preserving semantic stages, external system boundaries, and testable business rules.
 
 ## 7. Architectural Decisions Summary
 
 - [[0001-knowledge-graph-wikilink-policy]]: the repository uses Obsidian-compatible wikilinks as a lightweight relationship layer across existing `.aiassistant` Markdown artifacts.
+- [[0002-automation-simplicity-and-stage-boundaries]]: automation code must balance simplicity with clear process stages, external system boundaries, and testable business rules.
 
 ## 8. Known Risks / Limitations
 
@@ -105,6 +107,7 @@ Key directories:
 - Active context has been initialized for the repository itself.
 - The knowledge graph increment defines policy, usage rules, Obsidian inspection, and automated wikilink validation.
 - A migration changelog and runbook now describe how older `.aiassistant` projects should adopt the graph structure.
+- Engineering guidance now includes anti-overengineering rules and automation flow stage boundaries.
 
 ## 10. Next Steps / Priorities
 

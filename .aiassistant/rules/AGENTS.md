@@ -28,6 +28,8 @@ Before performing ANY action, the system MUST follow repository context rules.
 - NEVER use files inside `project_context/history/` unless explicitly requested
 - ALWAYS respect architectural decisions defined in `/decisions/`
 - Use `feedback/`, `roadmap/`, `specs/`, and `prompts/` when they exist and are relevant
+- ALWAYS open any accepted decision, runbook, or checklist explicitly referenced by `CURRENT_CONTEXT.md` before changing code or behavior
+- If the active context marks an artifact as mandatory, treat it as required startup context
 
 ## If context is missing or unclear:
 
@@ -51,6 +53,11 @@ Before performing ANY action, the system MUST follow repository context rules.
 - Ignoring context files
 - Using outdated context
 - Creating parallel context assumptions
+
+Related governance:
+
+- [[0002-automation-simplicity-and-stage-boundaries]]
+- [[WIKILINK_RULES]]
 
 I WANT YOU TO ASSUME THE ROLE OF:
 
@@ -291,6 +298,104 @@ IGNORE POINT 9 BELOW
 
 
 ====================================================================
+11.1) ARCHITECTURAL SIMPLICITY / ANTI-OVERENGINEERING
+====================================================================
+
+The system MUST optimize for the simplest architecture that safely preserves
+business behavior, operational clarity, observability, and testability.
+
+Simplicity is an architectural requirement, not an aesthetic preference.
+
+## Mandatory rules
+
+- Prefer the existing project execution pattern before introducing a new one.
+- Do NOT create new application layers, factories, CLIs, wrappers, adapters,
+  interfaces, or service abstractions unless they solve a current and concrete
+  problem.
+- Do NOT introduce abstractions for hypothetical future reuse.
+- Do NOT create parallel runtime paths for the same automation flow.
+- Do NOT split code into additional modules only to satisfy a generic structure
+  if the responsibility is already clear and cohesive.
+- Prefer direct composition over dependency-injection frameworks or factory
+  layers when there is only one runtime implementation.
+- Prefer one clear orchestration path over multiple equivalent entrypoints.
+- Keep business-rule preservation higher priority than structural elegance.
+
+## Allowed reasons to add abstraction
+
+A new abstraction is allowed when at least one of these is true:
+
+- it isolates an external integration boundary;
+- it isolates side effects such as files, SAP, APIs, email, database, or GUI;
+- it clarifies an important domain contract;
+- it protects a critical business rule with clearer testability;
+- it supports confirmed variation in source, format, channel, strategy, or implementation;
+- it removes meaningful duplication already present in multiple places;
+- it separates runtime wiring from business behavior;
+- it is required by an accepted decision, spec, or current context;
+- it reduces, rather than increases, the number of concepts needed to understand the flow.
+
+## SDK / library exception
+
+When the explicit project goal is to build an SDK, framework, or reusable
+library, abstraction is allowed and expected.
+
+Even then, every abstraction must still be justified by a concrete API contract,
+reuse scenario, extension point, integration boundary, or testability need.
+
+Do not add SDK-style extension points for hypothetical consumers that are not
+part of the current requirements.
+
+## Architecture review gate
+
+Before adding a new architectural layer or abstraction, the AI MUST be able to
+answer:
+
+1. What concrete design pressure justifies this now?
+2. Why is the existing structure insufficient?
+3. What simpler alternative was considered?
+4. Does this create a second way to execute or understand the same flow?
+5. How does this preserve business behavior?
+6. What tests or checklist items validate the change?
+
+If these answers are weak or speculative, do not add the abstraction.
+Ask for approval before proceeding.
+
+
+====================================================================
+11.2) AUTOMATION FLOW DESIGN
+====================================================================
+
+Automation code must avoid both extremes:
+
+- monolithic scripts where extraction, transformation, business rules,
+  integrations, logging, and output generation are mixed together;
+- excessive fragmentation where every small operation becomes a layer,
+  factory, interface, or module without a concrete design reason.
+
+The main entrypoint should act as a semantic orchestrator of process stages.
+
+A process stage may be granular or intermediate, depending on the workflow.
+The correct boundary is the one that makes the automation easier to understand,
+test, observe, and recover.
+
+Stages MUST be split when they cross different external systems.
+
+Stages SHOULD be split when:
+
+- they represent different business activities;
+- they contain business rules that should be tested in isolation;
+- they isolate side effects such as files, SAP, APIs, email, database, or GUI;
+- they improve error reporting by identifying which process stage failed;
+- they reduce meaningful complexity in the main flow.
+
+Stages do not need to be split when the operations are naturally cohesive and
+are easier to understand as one intermediate process block.
+
+Business rules should be testable without executing the full automation whenever possible.
+
+
+====================================================================
 🔵 12) EXTERNAL API INTEGRATION
 ====================================================================
 - Never assume API response structure is consistent across endpoints.
@@ -347,7 +452,16 @@ IGNORE POINT 9 BELOW
 - Ensure directories represent logical domains (services, core, utils, etc).
 - All modules must be importable (use __init__.py when needed).
 - Avoid flat script structures when building reusable systems.
-- Design code as if it could become an internal library or SDK.
+- Project structure must reflect actual responsibilities, not generic layering.
+- Avoid creating application/factory/orchestrator layers when a direct
+  entrypoint plus focused services is sufficient.
+- Preserve the repository's established operational pattern unless the user
+  explicitly approves a new one.
+- When simplifying architecture, remove obsolete parallel paths instead of
+  leaving both old and new structures active.
+- Design automation-specific code as production-grade internal code, but do not
+  turn it into a generic SDK unless the current task, context, or accepted
+  decision explicitly requires it.
 
 
 ====================================================================
@@ -385,8 +499,13 @@ IGNORE POINT 9 BELOW
 ====================================================================
 🔵 16) SDK
 ====================================================================
-- Think like you are building a production-grade internal SDK.
-- Optimize for maintainability, not just correctness.
+- Think like you are building production-grade internal code.
+- Optimize for maintainability, clarity, testability, and operational reliability.
+- Do NOT turn automation-specific code into a generic SDK unless the current
+  task explicitly targets SDK development, there is an accepted architectural
+  decision requiring reuse, or repeated concrete use cases justify extracting
+  reusable behavior.
+- Reusability must be earned by concrete need, not assumed upfront.
 
 
 ## ====================================================================
