@@ -8,6 +8,8 @@ Its purpose is to provide a reusable `.aiassistant` structure that makes an AI a
 
 The current evolution adds Obsidian-compatible wikilinks so the Markdown knowledge base can be navigated as a visual knowledge graph.
 
+The repository also defines a process knowledge lifecycle: when agents change business rules, process stages, external system interactions, contracts, or operational behavior, the related process documentation must evolve with the implementation.
+
 ## 2. System Architecture
 
 The system is documentation-first and repository-local.
@@ -25,8 +27,11 @@ Main layers:
 - `.aiassistant/rules/` stores repository and agent behavior rules.
 - `.aiassistant/tools/` stores repository-local support scripts.
 - `.aiassistant/templates/` stores reusable starter artifacts.
+- `project_knowledge/` is the recommended optional project-level root for business process, rule, system, contract, and risk documentation.
 
 The knowledge graph is a relationship layer over these existing Markdown artifacts. It must not create a parallel source of truth.
+
+Project process knowledge is separate from `.aiassistant` governance. It documents the business process of the project being built; it must not replace runtime context, decisions, or repository rules.
 
 ## 3. Integrations
 
@@ -50,6 +55,7 @@ Key directories:
 - `.aiassistant/tools/`: executable support scripts for validation and derived outputs.
 - `.aiassistant/templates/`: reusable scaffolding, not a source of truth.
 - `.aiassistant/MAP.md`: Obsidian vault map for navigating major artifact relationships.
+- `project_knowledge/`: optional project process knowledge root used when a project has business rules, operational flows, external systems, contracts, or risks to document.
 
 ## 5. Core Flows
 
@@ -77,6 +83,12 @@ Key directories:
 - Processing: follow [[migrate-legacy-aiassistant-to-knowledge-graph]] without overwriting active project context.
 - Output: migrated `.aiassistant` structure with wikilink policy, graph map, Obsidian workflow, and validation tooling.
 
+### Process knowledge documentation flow
+
+- Input: a development change that affects business rules, process stages, external systems, contracts, risks, or operational behavior.
+- Processing: follow [[PROCESS_KNOWLEDGE_RULES]], update the relevant project process notes, and validate with [[process-documentation-quality-checklist]].
+- Output: project process documentation that evolves with the implementation and remains navigable through wikilinks and optional Obsidian Canvas views.
+
 ## 6. Business Rules
 
 - `CURRENT_CONTEXT.md` is the only active runtime context.
@@ -87,11 +99,14 @@ Key directories:
 - Templates accelerate creation but are not a source of truth.
 - Wikilinks must connect existing responsibility-specific artifacts and must not create duplicated documentation.
 - Automation architecture must avoid speculative abstraction while preserving semantic stages, external system boundaries, and testable business rules.
+- Business-rule and process documentation must evolve with development when process behavior, rules, integrations, contracts, risks, or operational effects change.
+- Markdown process notes are the source of truth; Obsidian Canvas is optional visual navigation.
 
 ## 7. Architectural Decisions Summary
 
 - [[0001-knowledge-graph-wikilink-policy]]: the repository uses Obsidian-compatible wikilinks as a lightweight relationship layer across existing `.aiassistant` Markdown artifacts.
 - [[0002-automation-simplicity-and-stage-boundaries]]: automation code must balance simplicity with clear process stages, external system boundaries, and testable business rules.
+- [[0003-process-knowledge-documentation-lifecycle]]: agents must update process and business-rule documentation as part of development when business behavior changes.
 
 ## 8. Known Risks / Limitations
 
@@ -99,6 +114,8 @@ Key directories:
 - Broken wikilinks can create misleading relationships.
 - Obsidian may not index `.aiassistant` when the project root is opened as a vault; opening `.aiassistant` itself as the vault is the preferred first-phase usage.
 - Repository-root files are outside the `.aiassistant` Obsidian vault and do not appear as graph nodes unless the repository root is opened as the vault and dot-folder indexing is available.
+- Process documentation can become stale if agents treat it as optional after implementation.
+- Excessive process notes can create noise if agents document implementation details instead of business behavior.
 
 ## 9. Current State
 
@@ -108,12 +125,14 @@ Key directories:
 - The knowledge graph increment defines policy, usage rules, Obsidian inspection, and automated wikilink validation.
 - A migration changelog and runbook now describe how older `.aiassistant` projects should adopt the graph structure.
 - Engineering guidance now includes anti-overengineering rules and automation flow stage boundaries.
+- Process knowledge rules now require agents to evolve business-rule and process documentation together with development work.
 
 ## 10. Next Steps / Priorities
 
 - Continue adding wikilinks incrementally to existing `.aiassistant` artifacts where relationships are meaningful.
 - Use the validation script before accepting new graph relationships.
 - Keep Obsidian as the primary visual graph tool for the first phase.
+- Apply [[update-process-knowledge-documentation]] in projects where development changes business process behavior.
 
 ## Rules
 

@@ -17,6 +17,7 @@ They must not create a separate wiki or duplicate source of truth.
 Related governance:
 
 - [[0001-knowledge-graph-wikilink-policy]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 - [[validate-wikilinks]]
 - [[use-obsidian-knowledge-graph]]
 
@@ -98,6 +99,19 @@ If the repository root is opened as the vault, verify that Obsidian indexes the 
 Obsidian should detect the Markdown files and display wikilink relationships in Graph View.
 
 The repository must remain readable and useful without Obsidian.
+
+## Project Process Knowledge
+
+Project-level process documentation may use relative wikilinks when that makes
+process folders easier to move or copy.
+
+Examples:
+
+- `[[../00-systems/source-system]]`
+- `[[rule-eligibility-check]]`
+- `[[contract-request-payload]]`
+
+Follow [[PROCESS_KNOWLEDGE_RULES]] for business-rule and process documentation.
 
 ## Validation
 

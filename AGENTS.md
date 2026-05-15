@@ -21,7 +21,8 @@ Before taking any action, ALWAYS follow this reading order:
 9. `.aiassistant/rules/CONTEXT_RULES.md`
 10. `.aiassistant/rules/REPOSITORY_GUIDELINES.md`
 11. `.aiassistant/rules/WIKILINK_RULES.md`
-12. `.aiassistant/rules/AGENTS.md`
+12. `.aiassistant/rules/PROCESS_KNOWLEDGE_RULES.md`
+13. `.aiassistant/rules/AGENTS.md`
 
 ---
 
@@ -119,6 +120,10 @@ All code generation MUST follow:
 All Markdown relationship links inside `.aiassistant` MUST follow:
 
 - `.aiassistant/rules/WIKILINK_RULES.md`
+
+Business-rule and process documentation MUST follow:
+
+- `.aiassistant/rules/PROCESS_KNOWLEDGE_RULES.md`
 
 ---
 

@@ -9,6 +9,7 @@ Related governance:
 - [[CURRENT_CONTEXT]]
 - [[CONTEXT_TEMPLATE]]
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 - [[decisions/README|decisions guidance]]
 - [[MAP]]
 
@@ -26,6 +27,10 @@ Use templates to accelerate creation of:
 - roadmap files: [[roadmap-template]]
 - specs: [[spec-template]]
 - prompts: [[prompt-template]]
+- process knowledge maps: [[process-knowledge-map-template]]
+- process indexes: [[process-index-template]]
+- business rule notes: [[business-rule-template]]
+- system notes: [[system-note-template]]
 
 ---
 

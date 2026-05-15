@@ -1,6 +1,7 @@
 # Tools
 
-This directory stores repository-local support scripts for `.aiassistant` maintenance.
+This directory stores repository-local support scripts for `.aiassistant` and
+project knowledge maintenance.
 
 Tools are executable helpers. They are not a source of truth.
 
@@ -21,5 +22,6 @@ Do not use this directory for:
 Related files:
 
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 - [[validate-wikilinks]]
 - [[0001-knowledge-graph-wikilink-policy]]

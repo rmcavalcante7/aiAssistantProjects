@@ -119,8 +119,8 @@ class WikilinkGraphValidator:
     Validate wikilinks and derive graph data from a Markdown vault.
 
     The validator scans Markdown files, ignores fenced and inline code,
-    resolves Obsidian-style wikilinks, and reports broken, ambiguous, or
-    malformed targets.
+    resolves Obsidian-style wikilinks including relative slash-based targets,
+    and reports broken, ambiguous, or malformed targets.
 
     :param vault_path: Path = path to the Markdown vault.
 
@@ -179,6 +179,7 @@ class WikilinkGraphValidator:
                     continue
 
                 matches: list[MarkdownFile] = self._resolveTarget(
+                    source=wikilink.source,
                     target=wikilink.target,
                     by_stem=by_stem,
                     by_relative_path=by_relative_path,
@@ -301,6 +302,7 @@ class WikilinkGraphValidator:
 
     def _resolveTarget(
         self,
+        source: str,
         target: str,
         by_stem: dict[str, list[MarkdownFile]],
         by_relative_path: dict[str, MarkdownFile],
@@ -309,12 +311,54 @@ class WikilinkGraphValidator:
         normalized_target = self._stripMarkdownSuffix(normalized_target)
 
         if "/" in normalized_target:
-            match: MarkdownFile | None = by_relative_path.get(
+            direct_match: MarkdownFile | None = by_relative_path.get(
                 normalized_target
             )
-            return [match] if match else []
+            if direct_match:
+                return [direct_match]
+
+            relative_target: str = self._normalizeRelativeTarget(
+                source=source,
+                target=normalized_target,
+            )
+            if relative_target:
+                relative_match: MarkdownFile | None = by_relative_path.get(
+                    relative_target
+                )
+                return [relative_match] if relative_match else []
+
+            return []
 
         return by_stem.get(normalized_target, [])
+
+    def _normalizeRelativeTarget(self, source: str, target: str) -> str:
+        """
+        Normalize a slash-based wikilink target relative to the source file.
+
+        :param source: str = source Markdown path relative to the vault.
+        :param target: str = slash-based wikilink target without `.md`.
+
+        :return: str = normalized vault-relative target, or an empty string
+            when the target escapes the vault root.
+        """
+
+        source_parent: str = source.rsplit("/", 1)[0] if "/" in source else ""
+        combined_path: str = (
+            f"{source_parent}/{target}" if source_parent else target
+        )
+        parts: list[str] = []
+
+        for part in combined_path.split("/"):
+            if part in ("", "."):
+                continue
+            if part == "..":
+                if not parts:
+                    return ""
+                parts.pop()
+                continue
+            parts.append(part)
+
+        return "/".join(parts)
 
     def _stripMarkdownSuffix(self, target: str) -> str:
         if target.endswith(".md"):
@@ -369,7 +413,7 @@ def parseArguments(argv: list[str]) -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser(
-        description="Validate .aiassistant Obsidian wikilinks."
+        description="Validate Obsidian wikilinks in a Markdown vault."
     )
     parser.add_argument(
         "--vault",

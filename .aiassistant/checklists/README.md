@@ -16,6 +16,7 @@ Related governance:
 - [[runbooks/README|runbooks guidance]]
 - [[decisions/README|decisions guidance]]
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 
 ---
 
@@ -101,6 +102,10 @@ Use:
 - [[runbooks/README|runbooks guidance]] for execution
 - [[decisions/README|decisions guidance]] for rules
 - [[CURRENT_CONTEXT]] for system understanding
+
+Common starter checklists in this repository:
+
+- [[process-documentation-quality-checklist]]
 
 ---
 

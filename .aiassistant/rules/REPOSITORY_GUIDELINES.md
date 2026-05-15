@@ -37,6 +37,7 @@ Defines behavior and standards:
 - CONTEXT_RULES.md → context lifecycle
 - REPOSITORY_GUIDELINES.md → repository governance
 - WIKILINK_RULES.md → Markdown relationship and Obsidian graph rules
+- PROCESS_KNOWLEDGE_RULES.md → project process and business-rule documentation rules
 
 ---
 
@@ -150,6 +151,22 @@ Rules:
 
 ---
 
+## project_knowledge/ (optional, outside `.aiassistant/`)
+
+Documents the business process, operational flow, external systems, contracts,
+risks, and business rules of the project being built.
+
+Rules:
+
+- use `project_knowledge/` only when the project has real process knowledge to
+  document
+- do not use it as an alternative `.aiassistant`
+- keep Markdown as the source of truth
+- use Obsidian Canvas only as visual navigation
+- follow [[PROCESS_KNOWLEDGE_RULES]]
+
+---
+
 # 🔄 3. WHEN TO UPDATE EACH COMPONENT
 
 ## Update CURRENT_CONTEXT.md when:
@@ -235,6 +252,21 @@ Rules:
 
 ---
 
+## Update project process knowledge when:
+
+- a business rule changes
+- a process stage is added, removed, or redefined
+- an external system interaction changes
+- an input, output, file, payload, status, or schema contract changes
+- error handling, retry, fallback, or missing-data behavior changes
+- evidence, audit, reconciliation, or validation expectations change
+- an operational risk or manual intervention point changes
+
+Use [[update-process-knowledge-documentation]] and validate with
+[[process-documentation-quality-checklist]].
+
+---
+
 # 🚫 4. FORBIDDEN PRACTICES
 
 The repository MUST NOT:
@@ -245,7 +277,8 @@ The repository MUST NOT:
 - duplicate information across files
 - create multiple sources of truth
 - keep outdated files active
-- create alternative structures outside `.aiassistant/`
+- create alternative AI governance structures outside `.aiassistant/`
+- use project process documentation as a replacement for `.aiassistant`
 
 ---
 

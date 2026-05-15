@@ -16,6 +16,7 @@ Related governance:
 - [[decisions/README|decisions guidance]]
 - [[checklists/README|checklists guidance]]
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 
 ---
 
@@ -129,6 +130,7 @@ Common starter runbooks in this repository:
 - [[use-obsidian-knowledge-graph]]
 - [[validate-wikilinks]]
 - [[migrate-legacy-aiassistant-to-knowledge-graph]]
+- [[update-process-knowledge-documentation]]
 
 ---
 

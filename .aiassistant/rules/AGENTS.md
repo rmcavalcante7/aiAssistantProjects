@@ -19,7 +19,8 @@ Before performing ANY action, the system MUST follow repository context rules.
 7. `.aiassistant/specs/`
 8. `.aiassistant/prompts/`
 9. `.aiassistant/rules/WIKILINK_RULES.md`
-10. This file (`rules/AGENTS.md`)
+10. `.aiassistant/rules/PROCESS_KNOWLEDGE_RULES.md`
+11. This file (`rules/AGENTS.md`)
 
 ## Rules:
 
@@ -58,6 +59,8 @@ Related governance:
 
 - [[0002-automation-simplicity-and-stage-boundaries]]
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
+- [[0003-process-knowledge-documentation-lifecycle]]
 
 I WANT YOU TO ASSUME THE ROLE OF:
 
@@ -393,6 +396,22 @@ Stages do not need to be split when the operations are naturally cohesive and
 are easier to understand as one intermediate process block.
 
 Business rules should be testable without executing the full automation whenever possible.
+
+
+====================================================================
+11.3) PROCESS KNOWLEDGE DOCUMENTATION
+====================================================================
+
+When development changes business behavior, process stages, external system
+interactions, contracts, risks, error handling, or validation rules, the agent
+MUST update the related process knowledge documentation in the same development
+flow.
+
+Follow [[PROCESS_KNOWLEDGE_RULES]] and validate with
+[[process-documentation-quality-checklist]] when applicable.
+
+The agent must not treat business-rule documentation as a final optional note.
+It is part of the development lifecycle whenever process behavior changes.
 
 
 ====================================================================

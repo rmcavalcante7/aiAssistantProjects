@@ -2,7 +2,8 @@
 
 ## Objective
 
-Validate Obsidian-compatible wikilinks inside `.aiassistant` Markdown files.
+Validate Obsidian-compatible wikilinks inside a Markdown vault, usually
+`.aiassistant` or a project process knowledge root such as `project_knowledge`.
 
 ## When to use
 
@@ -16,12 +17,12 @@ Use this runbook when:
 ## Preconditions
 
 - Python 3.10 or newer is available.
-- `.aiassistant` exists in the repository root.
+- The target Markdown vault exists in the repository root.
 - Wikilinks follow [[WIKILINK_RULES]].
 
 ## Inputs
 
-- `.aiassistant` vault path.
+- Markdown vault path, such as `.aiassistant` or `project_knowledge`.
 - Optional JSON output path.
 
 ## Steps
@@ -33,8 +34,14 @@ Use this runbook when:
 python .aiassistant/tools/validate_wikilinks.py --vault .aiassistant
 ```
 
-3. Review the summary.
-4. If JSON graph data is needed, run:
+3. For project process knowledge, run:
+
+```powershell
+python .aiassistant/tools/validate_wikilinks.py --vault project_knowledge
+```
+
+4. Review the summary.
+5. If JSON graph data is needed, run:
 
 ```powershell
 python .aiassistant/tools/validate_wikilinks.py --vault .aiassistant --json-output .aiassistant/graph.json
@@ -68,6 +75,7 @@ Remove unsupported syntax from the wikilink target.
 
 ## Notes
 
-This runbook validates `.aiassistant` documentation only.
+This runbook validates `.aiassistant` documentation and can also validate
+project process knowledge roots that use relative wikilinks.
 
 It does not replace [[use-obsidian-knowledge-graph]], which remains the first-phase visual inspection flow.

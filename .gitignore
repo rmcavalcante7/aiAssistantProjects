@@ -4,7 +4,9 @@
 # Obsidian local vault state
 .obsidian/
 .aiassistant/.obsidian/
-*.canvas
+.aiassistant/*.canvas
+Sem t?tulo.canvas
+Untitled.canvas
 
 # Python cache
 __pycache__/

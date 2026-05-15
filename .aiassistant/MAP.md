@@ -16,8 +16,10 @@ It connects the repository governance artifacts without replacing their responsi
 - [[REPOSITORY_GUIDELINES]]
 - [[rules/AGENTS|AGENTS rules]]
 - [[WIKILINK_RULES]]
+- [[PROCESS_KNOWLEDGE_RULES]]
 - [[0001-knowledge-graph-wikilink-policy]]
 - [[0002-automation-simplicity-and-stage-boundaries]]
+- [[0003-process-knowledge-documentation-lifecycle]]
 
 ## Execution And Validation
 
@@ -26,6 +28,15 @@ It connects the repository governance artifacts without replacing their responsi
 - [[validate-wikilinks]]
 - [[use-obsidian-knowledge-graph]]
 - [[migrate-legacy-aiassistant-to-knowledge-graph]]
+- [[update-process-knowledge-documentation]]
+- [[process-documentation-quality-checklist]]
+
+## Process Knowledge
+
+- [[process-knowledge-map-template]]
+- [[process-index-template]]
+- [[business-rule-template]]
+- [[system-note-template]]
 
 ## Evolution
 
