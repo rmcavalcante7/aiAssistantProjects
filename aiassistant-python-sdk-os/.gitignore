@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.pkgtest-venv/
+
+# Local IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local AI/Obsidian state
+.obsidian/
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
